@@ -1,204 +1,200 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<title>Wine Manager Application</title>
 
-<head>
-	<title>Wine Manager Application</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+		<style>
+			.smaller {
+				width:600px;
+				margin-left:auto;
+				margin-right:auto;
+			}
 
-	<style>
-		.smaller {
-			width:600px;
-			margin-left:auto;
-			margin-right:auto;
-		}
+			.margin-top-40 {
+				margin-top:40px;
+			}
 
-		.margin-top-40 {
-			margin-top:40px;
-		}
+			.bold {
+				font-weight:bold;
+			}
 
-		.bold {
-			font-weight:bold;
-		}
+			.margin-top-10 {
+				margin-top:10px;
+			}
 
-		.margin-top-10 {
-			margin-top:10px;
-		}
+			.txt-center {
+				text-align:center;
+			}
 
-		.txt-center {
-			text-align:center;
-		}
+			img {
+				width: 100px;
+				height: 100px;
+			}
+		</style>
+	</head>
 
-		img {
-			width: 100px;
-			height: 100px;
-		}
-	</style>
-</head>
+	<body>
+		<div id="content"></div>
 
-<body>
-
-<div id="content"></div>
-
-<script type="x-handlebars-template" id="show-wines-template">
-	<div class="container margin-top-40">
-		<div>
-			<a data-toggle="modal" data-target="#add-wine-modal" class="btn btn-primary">Add New Wine</a>
-		</div>
-		<table class="table striped">
-			<thead>
-				<th>Name</th>
-				<th>Year</th>
-				<th>Grapes</th>
-				<th>Country</th>
-				<th>Region</th>
-				<th>Description</th>
-				<th>Picture</th>
-				<th>Price</th>
-			</thead>
-			<tbody>
-				{{#each wineData}}
-				<tr>
-					<td>{{name}}</td>
-					<td>{{year}}</td>
-					<td>{{grapes}}</td>
-					<td>{{country}}</td>
-					<td>{{region}}</td>
-					<td>{{description}}</td>
-					<td><img src="{{picture}}"/></td>
-					<td>{{price}}</td>
-					<td>
-						<a href="#edit/{{id}}" class="btn btn-primary">Edit</a>
-						<a href="#" class="btn btn-danger delete-button" id="{{id}}">Delete</a>
-					</td>
-				</tr>
-				{{/each}}
-			</tbody>
-		</table>
-	</div>
-</script>
-
-<script type="x-handlebars-template" id="edit-wine-template">
-	<div class="well smaller margin-top-40">
-		<div class="bold">
-			Name
-		</div>
-		<div class="margin-top-10">
-			<input type="text" class="form-control" name="name" value="{{name}}"  />
-		</div>
-		<div class="bold margin-top-10">
-			Year
-		</div>
-		<div class="margin-top-10">
-			<input type="text" class="form-control" name="year" value="{{year}}" />
-		</div>
-		<div class="bold margin-top-10">
-			Grapes
-		</div>
-		<div class="margin-top-10">
-			<input type="text" class="form-control" name="grapes" value="{{grapes}}"/>
-		</div>
-		<div class="bold">
-			Country
-		</div>
-		<div class="margin-top-10">
-			<input type="text" class="form-control" name="country" value="{{country}}"  />
-		</div>
-		<div class="bold margin-top-10">
-			Region
-		</div>
-		<div class="margin-top-10">
-			<input type="text" class="form-control" name="region" value="{{region}}" />
-		</div>
-		<div class="bold margin-top-10">
-			Description
-		</div>
-		<div class="margin-top-10">
-			<input type="text" class="form-control" name="description" value="{{description}}"/>
-		</div>
-		<div class="bold margin-top-10">
-			Price
-		</div>
-		<div class="margin-top-10">
-			<input type="text" class="form-control" name="price" value="{{price}}"/>
-		</div>
-		<div class="margin-top-10 txt-center">
-			<a href="#" class="btn btn-success" id="submit-edits" edit_id="{{id}}">Submit Edits</a>
-		</div>
-	</div>
-</script>
-
-<div id="add-wine-modal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-				<h4 class="modal-title">Add a New Wine</h4>
+		<script type="x-handlebars-template" id="show-wines-template">
+			<div class="container margin-top-40">
+				<div>
+					<a data-toggle="modal" data-target="#add-wine-modal" class="btn btn-primary">Add New Wine</a>
+				</div>
+				<table class="table striped">
+					<thead>
+						<th>Name</th>
+						<th>Year</th>
+						<th>Grapes</th>
+						<th>Country</th>
+						<th>Region</th>
+						<th>Description</th>
+						<th>Picture</th>
+						<th>Price</th>
+					</thead>
+					<tbody>
+						{{#each wineData}}
+						<tr>
+							<td>{{name}}</td>
+							<td>{{year}}</td>
+							<td>{{grapes}}</td>
+							<td>{{country}}</td>
+							<td>{{region}}</td>
+							<td>{{description}}</td>
+							<td><img src="{{picture}}"/></td>
+							<td>{{price}}</td>
+							<td>
+								<a href="#edit/{{id}}" class="btn btn-primary">Edit</a>
+								<a href="#" class="btn btn-danger delete-button" id="{{id}}">Delete</a>
+							</td>
+						</tr>
+						{{/each}}
+					</tbody>
+				</table>
 			</div>
-			<div class="modal-body">
+		</script>
+
+		<script type="x-handlebars-template" id="edit-wine-template">
+			<div class="well smaller margin-top-40">
 				<div class="bold">
 					Name
 				</div>
 				<div class="margin-top-10">
-					<input type="text" class="form-control" id="add-name"/>
+					<input type="text" class="form-control" name="name" value="{{name}}"  />
 				</div>
 				<div class="bold margin-top-10">
 					Year
 				</div>
 				<div class="margin-top-10">
-					<input type="text" class="form-control"  id="add-year"/>
+					<input type="text" class="form-control" name="year" value="{{year}}" />
 				</div>
 				<div class="bold margin-top-10">
 					Grapes
 				</div>
 				<div class="margin-top-10">
-					<input type="text" class="form-control"  id="add-grapes"/>
+					<input type="text" class="form-control" name="grapes" value="{{grapes}}"/>
 				</div>
-				<div class="bold margin-top-10">
+				<div class="bold">
 					Country
 				</div>
 				<div class="margin-top-10">
-					<input type="text" class="form-control"  id="add-country"/>
+					<input type="text" class="form-control" name="country" value="{{country}}"  />
 				</div>
 				<div class="bold margin-top-10">
 					Region
 				</div>
 				<div class="margin-top-10">
-					<input type="text" class="form-control"  id="add-region"/>
+					<input type="text" class="form-control" name="region" value="{{region}}" />
 				</div>
 				<div class="bold margin-top-10">
 					Description
 				</div>
 				<div class="margin-top-10">
-					<input type="text" class="form-control" id="add-description" />
+					<input type="text" class="form-control" name="description" value="{{description}}"/>
 				</div>
 				<div class="bold margin-top-10">
 					Price
 				</div>
 				<div class="margin-top-10">
-					<input type="text" class="form-control" id="add-price" />
+					<input type="text" class="form-control" name="price" value="{{price}}"/>
+				</div>
+				<div class="margin-top-10 txt-center">
+					<a href="#" class="btn btn-success" id="submit-edits" edit_id="{{id}}">Submit Edits</a>
 				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" id="add-wine">Add New Wine</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+		</script>
 
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="libraries/handlebars.js"></script>
-<script src="libraries/underscore-min.js"></script>
-<script src="libraries/backbone-min.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="app.js"></script>
+		<div id="add-wine-modal" class="modal fade">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title">Add a New Wine</h4>
+					</div>
+					<div class="modal-body">
+						<div class="bold">
+							Name
+						</div>
+						<div class="margin-top-10">
+							<input type="text" class="form-control" id="add-name"/>
+						</div>
+						<div class="bold margin-top-10">
+							Year
+						</div>
+						<div class="margin-top-10">
+							<input type="text" class="form-control"  id="add-year"/>
+						</div>
+						<div class="bold margin-top-10">
+							Grapes
+						</div>
+						<div class="margin-top-10">
+							<input type="text" class="form-control"  id="add-grapes"/>
+						</div>
+						<div class="bold margin-top-10">
+							Country
+						</div>
+						<div class="margin-top-10">
+							<input type="text" class="form-control"  id="add-country"/>
+						</div>
+						<div class="bold margin-top-10">
+							Region
+						</div>
+						<div class="margin-top-10">
+							<input type="text" class="form-control"  id="add-region"/>
+						</div>
+						<div class="bold margin-top-10">
+							Description
+						</div>
+						<div class="margin-top-10">
+							<input type="text" class="form-control" id="add-description" />
+						</div>
+						<div class="bold margin-top-10">
+							Price
+						</div>
+						<div class="margin-top-10">
+							<input type="text" class="form-control" id="add-price" />
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary" id="add-wine">Add New Wine</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
 
-</body>
-
+		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+		<script src="libraries/handlebars.js"></script>
+		<script src="libraries/underscore-min.js"></script>
+		<script src="libraries/backbone-min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+		<script src="app.js"></script>
+	</body>
 </html>

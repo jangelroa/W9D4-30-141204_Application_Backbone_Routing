@@ -62,7 +62,6 @@ router.on("route:edit_wines", function(id) {
 // Start back
 Backbone.history.start();
 
-
 //When user clicks edit button get the product information
 //in preparation for editing
 // $(document).on("click", ".edit-button", function(){
@@ -81,7 +80,6 @@ $(document).on("click", "#submit-edits", function(){
 				region: $("input[name=region]").val(),
 				description: $("input[name=description]").val(),
 				price: $("input[name=price]").val()
-
 		},
 		success: function(data) {
 			window.location.href = "#index";
@@ -104,7 +102,6 @@ $(document).on("click", "#add-wine", function(){
 				region: $("#add-region").val(),
 				description: $("#add-description").val(),
 				price: $("#add-price").val()
-
 		},
 		success: function(){
 			$("#add-wine-modal").modal("hide");
@@ -128,10 +125,3 @@ $(document).on("click", ".delete-button", function(){
 		}
 	});
 });
-
-
-
-
-
-
-
